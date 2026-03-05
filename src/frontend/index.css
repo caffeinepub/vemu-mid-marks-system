@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ──────────────────────────────────────────────── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── OKLCH Design Tokens ─────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Navy Academic palette */
+    --background: 0.97 0.006 245;
+    --foreground: 0.18 0.04 260;
+
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.04 260;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.04 260;
+
+    /* Deep navy primary */
+    --primary: 0.28 0.09 264;
+    --primary-foreground: 0.98 0.005 245;
+
+    --secondary: 0.93 0.015 245;
+    --secondary-foreground: 0.28 0.09 264;
+
+    --muted: 0.94 0.012 245;
+    --muted-foreground: 0.52 0.035 255;
+
+    /* Amber accent */
+    --accent: 0.88 0.07 75;
+    --accent-foreground: 0.22 0.06 50;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.018 248;
+    --input: 0.88 0.018 248;
+    --ring: 0.42 0.09 264;
+
+    /* Status colors */
+    --success: 0.58 0.16 145;
+    --success-foreground: 0.98 0.01 145;
+    --warning: 0.75 0.18 75;
+    --warning-foreground: 0.22 0.06 50;
+    --info: 0.52 0.14 235;
+    --info-foreground: 0.97 0.01 235;
+
+    /* Charts */
+    --chart-1: 0.52 0.17 264;
+    --chart-2: 0.58 0.16 145;
+    --chart-3: 0.75 0.18 75;
+    --chart-4: 0.577 0.245 27;
+    --chart-5: 0.62 0.14 304;
+
+    /* Sidebar */
+    --sidebar: 0.22 0.065 264;
+    --sidebar-foreground: 0.88 0.025 245;
+    --sidebar-primary: 0.75 0.18 75;
+    --sidebar-primary-foreground: 0.18 0.06 55;
+    --sidebar-accent: 0.30 0.08 264;
+    --sidebar-accent-foreground: 0.95 0.012 245;
+    --sidebar-border: 0.32 0.07 264;
+    --sidebar-ring: 0.55 0.12 264;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "kern", "liga";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+}
+
+/* ─── Custom Utilities ────────────────────────────────────── */
+@layer utilities {
+  .text-success { color: oklch(var(--success)); }
+  .text-warning { color: oklch(var(--warning-foreground)); }
+  .bg-success { background-color: oklch(var(--success-foreground)); }
+  .bg-success-subtle { background-color: oklch(0.94 0.04 145); }
+  .bg-warning-subtle { background-color: oklch(0.96 0.06 75); }
+  .bg-info-subtle { background-color: oklch(0.94 0.04 235); }
+  .border-success { border-color: oklch(var(--success)); }
+  .border-warning { border-color: oklch(var(--warning)); }
+
+  .sidebar-gradient {
+    background: linear-gradient(
+      180deg,
+      oklch(0.22 0.065 264) 0%,
+      oklch(0.18 0.055 270) 100%
+    );
+  }
+
+  .login-bg {
+    background: 
+      radial-gradient(ellipse at 20% 50%, oklch(0.32 0.09 264 / 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, oklch(0.75 0.18 75 / 0.15) 0%, transparent 50%),
+      oklch(0.15 0.055 268);
+  }
+
+  .card-elevated {
+    box-shadow: 
+      0 1px 3px oklch(0.18 0.04 260 / 0.08),
+      0 4px 12px oklch(0.18 0.04 260 / 0.06),
+      0 0 0 1px oklch(0.88 0.018 248);
+  }
+
+  .table-row-hover:hover {
+    background-color: oklch(0.95 0.012 245);
+  }
+  
+  .stat-card-primary {
+    background: linear-gradient(135deg, oklch(0.28 0.09 264) 0%, oklch(0.22 0.065 264) 100%);
+  }
+  
+  .stat-card-accent {
+    background: linear-gradient(135deg, oklch(0.75 0.18 75) 0%, oklch(0.65 0.16 70) 100%);
+  }
+
+  .mark-input {
+    @apply w-16 text-center text-sm font-medium;
+    border: 1px solid oklch(var(--border));
+    border-radius: calc(var(--radius) - 2px);
+    padding: 4px 8px;
+    background: oklch(1 0 0);
+    color: oklch(var(--foreground));
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .mark-input:focus {
+    outline: none;
+    border-color: oklch(var(--ring));
+    box-shadow: 0 0 0 2px oklch(var(--ring) / 0.2);
+  }
+
+  .mark-input.error {
+    border-color: oklch(var(--destructive));
+    background: oklch(0.98 0.015 27);
+  }
+
+  .mark-input:disabled {
+    background: oklch(0.95 0.008 248);
+    color: oklch(var(--muted-foreground));
+    cursor: not-allowed;
+  }
+
+  /* Print styles for PDF export */
+  @media print {
+    .no-print { display: none !important; }
+    .print-table { width: 100%; font-size: 11px; }
+    body { background: white; color: black; }
+    .print-header { text-align: center; margin-bottom: 20px; }
+  }
+}
